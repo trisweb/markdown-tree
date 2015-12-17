@@ -1,15 +1,14 @@
-Markdown Tree
-=============
+Localytics Product Design Markdown Repository
+=============================================
 
 What is it?
 -----------
-Take a folder with a hierarchy of markdown files and use this script to serve that folder as a live styled site with a built in navigation.
+We like Markdown. We enjoy writing things in Markdown and just sticking them in
+Dropbox. This is a pretty easy way to take notes, document, specify, or do pretty much any
+other type of communication using structured language.
 
-Basically this is a Sinatra script to serve a hierarchy / tree directory of markdown files as a live dynamic site. Use intended for small sites built in markdown.
+However, we still want a nice way to present and view these simple Markdown files, and
+share them with others. Enter markdown-tree. It uses the excellent Redcarpet markdown parser
+(the same one github uses) and renders them with styles derived from Github's markdown CSS.
 
-
-Why
----
-There are many similar scripts done in a static fashion but I couldn't find a minimal system for serving markdown hierarchy based sites that was dynamic.
-
-For that reason I created Markdown Tree. Having a dynamically generated site allows me to not have to worry about regenerating my site every time I make a minor change.
+Nice! Best of both worlds. Easy dropbox standard file editing, and nice presentation and sharing.

@@ -3,35 +3,46 @@
 	<head>
 		<meta charset="utf-8">
 		<title><%= siteTitle %></title>
-		<link type="text/css" rel="stylesheet" href="/css/style.css"/>
+		<link type="text/css" rel="stylesheet" href="/css/style.css">
+		<link type="text/css" rel="stylesheet" href="/css/markdown.css">
+		<link type="text/css" rel="stylesheet" href="/css/octicons.css">
 	</head>
 	<body>
-		<div id="container">
-			<div id="main">
+		<header>
+			<a href="/"><img src="/images/logo.png" class="logomark"></a>
 
+			<!-- Build Breadcrumbs out -->
+			<div id="path">
+				<a href="/"><%= siteTitle %></a>
 
-				<!-- Build Breadcrumbs out -->
-				<div id="path">
-					<a href='/'><%= siteTitle %></a>
+				<% fullPath = '' %>
 
-					<% fullPath = '' %>
+				<% for pathPart in path %>
+					<% fullPath = fullPath + '/' + pathPart %>
+					<span class="octicon octicon-triangle-right muted"
+						style="margin-right: 0.75rem;"></span>
 
-					<% for pathPart in path %>
-						<% fullPath = fullPath + '/' + pathPart %>
-						&raquo;&nbsp;&nbsp;<a href="<%= fullPath %>"><%= pathPart%></a> 
-					<% end %>
+					<a href="<%= fullPath %>">
+						<span class="octicon octicon-file-directory"></span>
+						<%= pathPart%>
+					</a>
+				<% end %>
 
-				</div>
+			</div>
+		</header>
 
+		<main>
 
-				<!-- Build Navigation Children out -->		
+			<nav>
+				<!-- Build Navigation Children out -->
 				<div id="menu">
 					<ul>
 						<% for directory in children[:directories] %>
 							<li class="folder">
-							<a href="<%= fullPath + "/" + directory %>">
-								<%= directory %>
-							</a>
+								<a href="<%= fullPath + "/" + directory %>">
+									<span class="octicon octicon-file-directory"></span>
+									<%= directory %>
+								</a>
 							</li>
 						<% end %>
 
@@ -39,25 +50,27 @@
 							<% classes = "" %>
 							<% if currentFile == page %>
 								<% classes = "current" %>
-							<% end %> 
+							<% end %>
 							<li class="page <%= classes %>">
-							<a href="<%= fullPath + "/" + page %>">
-								<%= page %>
-							</a>
+								<a href="<%= fullPath + "/" + page %>">
+									<%= page %>
+								</a>
 							</li>
 						<% end %>
 
 					</ul>
 				</div>
+			</nav>
 
+			<section class="markdown-body">
+				<% if !folder_root %>
+					<div class="current-file"><span class="octicon octicon-markdown"></span>&nbsp; <%= currentFile %></div>
+				<% else %>
+					<p class="muted"><span class="octicon octicon-arrow-left"></span>&nbsp; Choose a file</p>
+				<% end %>
 
-				<div id="content"><%= content %></div>
-
-			</div>
-
-			<div id="footer">
-				<a href="http://validator.w3.org/check?uri=referer">Validate</a> &nbsp;::&nbsp; Generated: <%= Time.now %> via <a href="https://github.com/mil/markdown-tree">Markdown Tree</a>
-			</div>
-		</div>
+				<%= content %>
+			</section>
+		</main>
 	</body>
 </html>
